@@ -12,7 +12,7 @@
               <router-link to="/catagories"><span  class="ml-5 text-slate-200 hover:text-black">Categories</span></router-link>
               <router-link to="/wishlist"><span  class="ml-5 text-slate-200 hover:text-black">Wishlist</span></router-link>
               <div v-if="role == 'admin'">
-                <router-link to="/admin"><span class="ml-5 text-slate-200 hover:text-black">Admin</span></router-link>
+                <router-link to="/admin" :user="user"><span class="ml-5 text-slate-200 hover:text-black">Admin</span></router-link>
               </div>
           </div>
         <!------------------->
@@ -46,7 +46,7 @@ export default {
       localStorage.removeItem('role')
       localStorage.removeItem('ban')
       this.$emit('auth-change')
-      window.location = '/'
+      window.location.reload()
     },
     onAuthChange () {
       const token = localStorage.getItem('token')
@@ -62,7 +62,7 @@ export default {
         if (this.role == 'admin') {
           localStorage.setItem('role', 'admin')
         }
-        
+
         if (this.ban == 1) {
           this.logout()
           alert('You are banned from this website!')

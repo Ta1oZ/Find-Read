@@ -10,7 +10,7 @@ const multer = require('multer')
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, './static/uploads')
+    callback(null, './uploads')
   },
   filename: function (req, file, callback) {
     callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -23,7 +23,8 @@ const bookcheckSchema = Joi.object({
   type: Joi.string().required(),
   publisher: Joi.string().required().max(80),
   author: Joi.string().required().max(80),
-  content: Joi.string().required().max(255)
+  content: Joi.string().required().max(255),
+  user: Joi.number().integer()
 })
 
 //add books
@@ -48,14 +49,16 @@ router.post("/books", isLoggedIn,upload.single('book_image'), async function (re
   const author = req.body.author;
   const content = req.body.content;
   const publisher = req.body.publisher;
+  const userid = req.body.user;
+
   const conn = await pool.getConnection()
   // Begin transaction
   await conn.beginTransaction();
 
   try {
     let results = await conn.query(
-      "INSERT INTO  books(book_name, author, book_type, publisher, book_img, contents,add_by_id) VALUES(?, ?, ?, ?, ?, ?,1);",
-      [book_name, author, book_type, publisher, file.path.substr(6), content]
+      "INSERT INTO  books(book_name, author, book_type, publisher, book_img, contents, add_by_id) VALUES(?, ?, ?, ?, ?, ?, ?);",
+      [book_name, author, book_type, publisher, file.path.substr(6), content, parseInt(userid)]
     )
     await conn.commit()
     res.json("success!")

@@ -1,36 +1,38 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import axios from '@/plugins/axios'
 </script>
 
 <template>
-  <router-view :key="$route.fullPath" @auth-change="onAuthChange" :user="this.user" />
+  <router-view :key="$route.fullPath" @auth-change="onAuthChange" :user="user" />
 </template>
 
-
 <script>
-import axios from '@/plugins/axios'
-
 export default {
     data() {
         return {
             user: null
         }
     },
-    mounted () {
-        this.onAuthChange()
+    async mounted () {
+        await this.onAuthChange()
     },
     methods: {
-        onAuthChange () {
+        async onAuthChange () {
             const token = localStorage.getItem('token')
             if (token) {
-                this.getUser()
+                await this.getUser()
             }
         },
-        getUser () {
-            axios.get('/user/me').then(res => {
-                this.user = res.data
-            })
+        async getUser () {
+            try {
+                const response = await axios.get('/user/me')
+                this.user = response.data
+            } catch (error) {
+                console.error('Error fetching user:', error)
+                // Handle the error, e.g., display an error message
+            }
         },
     }
-    }
+}
 </script>

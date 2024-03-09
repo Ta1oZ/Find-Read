@@ -22,6 +22,6 @@ app.use(memberRouter.router)
 app.use(commentRouter.router)
 app.use(userRouter.router)
 
-app.listen(3000, () => {
-  console.log(`Example app listening at http://localhost:3000`)
+app.listen(3001, () => {
+  console.log(`Example app listening at http://localhost:3001`)
 })

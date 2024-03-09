@@ -45,7 +45,7 @@ export default {
   methods: {
     getwish() {
       axios
-        .get("http://localhost:3000/wishlist", {
+        .get("http://localhost:3001/wishlist", {
         })
         .then((response) => {
           this.items = response.data.wish;
@@ -56,12 +56,12 @@ export default {
         });
     },
     getimg(img) {
-      return "http://localhost:3000/" + img;
+      return "http://localhost:3001/" + img;
     },
     createwish(seen) {
       console.log(seen)
 
-      axios.post("http://localhost:3000/wishlist", { sent: seen })
+      axios.post("http://localhost:3001/wishlist", { sent: seen })
         .then((response) => {
           this.items = this.items.filter((x) => {
             return x.book_id != seen.book_id

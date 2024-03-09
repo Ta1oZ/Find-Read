@@ -52,7 +52,7 @@ export default {
   methods: {
     getbooks() {
       axios
-        .get("http://localhost:3000/books", {
+        .get("http://localhost:3001/books", {
         })
         .then((response) => {
           this.items = response.data.books;
@@ -63,11 +63,11 @@ export default {
         });
     },
     getimg(img) {
-      return "http://localhost:3000/" + img;
+      return "http://localhost:3001/" + img;
     },
     createwish(seen){
       console.log(seen)
-      axios.post("http://localhost:3000/wishlist", {sent:seen})
+      axios.post("http://localhost:3001/wishlist", {sent:seen})
       .then((response) =>{
         console.log(response)
         this.$router.push({ path: '/wishlist' })

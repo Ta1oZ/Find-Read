@@ -98,7 +98,8 @@ export default {
             email: "",
             first_name: "",
             last_name: "",
-            birth_date: ""
+            birth_date: "",
+            role: "user"
         }
     },
     methods: {
@@ -115,10 +116,11 @@ export default {
                     email: this.email,
                     first_name: this.first_name,
                     last_name: this.last_name,
-                    birth_date: this.birth_date
+                    birth_date: this.birth_date,
+                    role: this.role
                 }
 
-                axios.post("http://localhost:3000/user/signup", data)
+                axios.post("http://localhost:3001/user/signup", data)
                 .then((res) => {
                     alert("Sign up Success");
                     this.$router.push({ name: "login" })
