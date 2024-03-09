@@ -86,6 +86,9 @@ import useValidate from '@vuelidate/core'
 import { required, maxLength, minLength } from '@vuelidate/validators'
 
 export default {
+    props: {
+        user: String
+    },
     data() {
         return {
             v$: useValidate(),
@@ -94,7 +97,8 @@ export default {
             author: '',
             content: '',
             publisher: '',
-            file: null
+            file: null,
+            cuser: this.user
         }
     },
     methods: {
@@ -113,9 +117,10 @@ export default {
                 author: this.author,
                 content: this.content,
                 publisher: this.publisher,
-                book_image: this.file
+                book_image: this.file,
+                user: parseInt(this.cuser.user_id)
             }
-            axios.post('http://localhost:3000/books', data, {
+            axios.post('http://localhost:3001/books', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -135,7 +140,8 @@ export default {
             type: { required, minLength: minLength(1) },
             author: { required, maxLength: maxLength(80) },
             content: { required, maxLength: maxLength(255) },
-            publisher: { required, maxLength: maxLength(80) }
+            publisher: { required, maxLength: maxLength(80) },
+            user: {required}
         }
     },
 }

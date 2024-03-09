@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import introview from '../views/intro.vue'
 import HomeView from '../views/home.vue'
 import addView from '../views/add.vue'
@@ -14,7 +14,7 @@ import banuser from '../views/banuser.vue'
 import editbook from '../views/editbook.vue'
 import profile from '../views/profile.vue'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -31,6 +31,7 @@ const router = createRouter({
     {
       path: '/add',
       name: 'add',
+
       meta: { login: true },
       component: addView
     }
@@ -111,22 +112,3 @@ const router = createRouter({
 })
 
 export default router
-
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = !!localStorage.getItem('token')
-  const isAdmin = localStorage.getItem('role')
-
-  if (to.meta.login && !isLoggedIn) {
-    next({ path: '/login' })
-  }
-
-  if (to.meta.guest && isLoggedIn) {
-    next({ path: '/home'})
-  }
-
-  if (to.meta.role && isAdmin != 'admin') {
-    next({ path: '/home'})
-  }
-
-  next()
-})

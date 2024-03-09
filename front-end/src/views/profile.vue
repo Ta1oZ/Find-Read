@@ -5,7 +5,7 @@
             <div class="w-1/4 bg-slate-700 h-screen">
                 <div class="flex justify-center items-center" style="width:100%; height: 200px;">
                     <!-- profile image -->
-                    <img class="rounded-md w-auto h-auto mx-20 mt-8 " :src=" file ? `http://localhost:3000/uploads/${file}`: src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" style="width:200px; height: 150px;">
+                    <img class="rounded-md w-auto h-auto mx-20 mt-8 " :src=" file ? `http://localhost:3001/uploads/${file}`: src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" style="width:200px; height: 150px;">
                 </div>
                 <div>
                     <!-- profile name -->

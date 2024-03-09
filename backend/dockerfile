@@ -1,0 +1,26 @@
+# Use a Node.js base image
+FROM node:14-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+COPY node_modules ./
+
+
+# Install dependencies
+RUN npm install --production && npm cache clean --force
+
+# Rebuild native addons
+RUN npm rebuild
+
+# Copy application code
+COPY . .
+
+# Expose port (optional, adjust as needed)
+EXPOSE 3001
+
+# Define start command
+CMD ["node", "index.js"]

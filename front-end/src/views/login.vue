@@ -54,7 +54,7 @@ export default {
             password: this.password
     }
 
-    axios.post('http://localhost:3000/user/login/', data)
+    axios.post('http://localhost:3001/user/login/', data)
     .then(res => {
         alert('Login Success')
         const token = res.data.token

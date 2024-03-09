@@ -91,7 +91,7 @@ export default {
         }
     },
     created() {
-        axios.get(`http://localhost:3000/book/${this.$route.params.id}`)
+        axios.get(`http://localhost:3001/book/${this.$route.params.id}`)
             .then((response) => {
                 this.name = response.data.book[0].book_name;
                 this.type = response.data.book[0].book_type;

@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require("../config");
-const bcrypt = require('bcrypt')
+const argon2 = require('argon2')
 const Joi = require('joi')
 const multer = require('multer');
 // SET STORAGE
@@ -66,6 +66,7 @@ const signupSchema = Joi.object({
     confirm_password: Joi.string().required().valid(Joi.ref('password')),
     username: Joi.string().required().min(5).external(usernameCheck),
     birth_date: Joi.date().required(),
+    role : Joi.string().required().default("user")
 })
 
 router.post("/user/signup", async (req, res, next) => {
@@ -78,15 +79,16 @@ router.post("/user/signup", async (req, res, next) => {
     await conn.beginTransaction()
 
     const username = req.body.username
-    const password = await bcrypt.hash(req.body.password, 5)
+    const password = await argon2.hash(req.body.password)
     const first_name = req.body.first_name
     const last_name = req.body.last_name
     const email = req.body.email
+    const role = req.body.role
 
 
     try {
         await conn.query(
-            'INSERT INTO user(username, password, first_name, last_name, email) VALUES (?, ?, ?, ?, ?)', [username, password, first_name, last_name, email]
+            'INSERT INTO user(username, password, first_name, last_name, email, role) VALUES (?, ?, ?, ?, ?, ?)', [username, password, first_name, last_name, email, role]
         )
         conn.commit()
         res.status(201).send()
@@ -130,7 +132,7 @@ router.post('/user/login', async (req, res, next) => {
         }
 
         // Check if password is correct
-        if (!(await bcrypt.compare(password, user.password))) {
+        if (!(await argon2.verify(user.password, password))) {
             throw new Error('Incorrect username or password')
         }
 
@@ -154,7 +156,7 @@ router.post('/user/login', async (req, res, next) => {
         res.status(200).json({ 'token': token })
     } catch (error) {
         conn.rollback()
-        res.status(400).json(error.toString())
+        res.status(400).json(error.message)
     } finally {
         conn.release()
     }
