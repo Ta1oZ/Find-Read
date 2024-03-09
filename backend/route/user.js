@@ -6,7 +6,7 @@ const multer = require('multer');
 // SET STORAGE
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, "./static/uploads");
+        callback(null, './static/uploads');
     },
     filename: function (req, file, callback) {
         callback(
@@ -184,7 +184,7 @@ router.put('/user/update/:id', isLoggedIn, checkProfile, upload.single('user_pic
         last_name: Joi.string().required().max(150),
         email: Joi.string().required().email(),
     })
-    
+
     console.log(req.body)
 
     // Begin transaction
@@ -196,7 +196,7 @@ router.put('/user/update/:id', isLoggedIn, checkProfile, upload.single('user_pic
     }
     if (user_pic) {
         try {
-            const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ?, user_pic = ? WHERE user_id = ?", 
+            const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ?, user_pic = ? WHERE user_id = ?",
             [username, first_name, last_name, email, user_pic, req.params.id])
             console.log(row)
             await conn.commit()
@@ -212,7 +212,7 @@ router.put('/user/update/:id', isLoggedIn, checkProfile, upload.single('user_pic
     }
     else{
         try {
-            const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ? WHERE user_id = ?", 
+            const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ? WHERE user_id = ?",
             [username, first_name, last_name, email, req.params.id])
             console.log(row)
             await conn.commit()
