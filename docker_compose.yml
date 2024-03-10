@@ -2,36 +2,36 @@ version: '3.8'
 
 services:
   backend:
-    # build: backend/.
+    build: backend/.
     image: it64070092/findread-backend:latest
     ports:
       - "3001:3001"
     environment:
-      MYSQL_HOST: findreaddb.c9062wi2okby.us-east-1.rds.amazonaws.com
-      MYSQL_USER: admin
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
       MYSQL_PASSWORD: password!
-      MYSQL_DATABASE: findreaddb
+      MYSQL_DATABASE: find-read
     restart: always
-    # depends_on:
-    #   - mysql
+    depends_on:
+      - mysql
 
-  # mysql:
-  #   image: mysql:latest
-  #   environment:
-  #     MYSQL_ROOT_USER: root
-  #     MYSQL_ROOT_PASSWORD: password!
-  #     MYSQL_DATABASE: find-read
-  #   volumes:
-  #     - ./mysql-scripts/CREATE_TABLE_FIND_READ.sql:/docker-entrypoint-initdb.d/CREATE_TABLE_FIND_READ.sql
-  #     - mysql-data:/var/lib/mysql
-  #   ports:
-  #     - "3307:3306"
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password!
+      MYSQL_DATABASE: find-read
+    volumes:
+      - ./mysql-scripts/CREATE_TABLE_FIND_READ.sql:/docker-entrypoint-initdb.d/CREATE_TABLE_FIND_READ.sql
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
 
   frontend:
-    # build: front-end/.
+    build: front-end/.
     image: it64070092/findread-frontend:latest
     ports:
       - "8080:80"
 
-# volumes:
-#   mysql-data:
+volumes:
+  mysql-data:
