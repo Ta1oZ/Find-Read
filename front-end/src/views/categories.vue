@@ -39,6 +39,7 @@ import axios from '@/plugins/axios';
 </template>
 
 <script>
+
 export default {
   props: ['user'],
   data() {
@@ -63,7 +64,7 @@ export default {
         });
     },
     getimg(img) {
-      return "/" + img;
+      return 'http://44.204.115.240:3001/' + img;
     },
     createwish(seen){
       console.log(seen)

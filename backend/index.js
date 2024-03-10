@@ -13,7 +13,7 @@ app.use(cors({
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
-  allowedHeaders: true // Allow specified headers
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specified headers
 }));
 
 // app.use(cors());

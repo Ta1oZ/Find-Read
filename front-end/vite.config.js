@@ -2,6 +2,8 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+// const Dotenv = require('dotenv-webpack');
+// import DotenvWebpackPlugin from 'dotenv-webpack'
 
 // https://vitejs.dev/config/
 export default defineConfig({

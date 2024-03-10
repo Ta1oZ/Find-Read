@@ -28,7 +28,7 @@ const bookcheckSchema = Joi.object({
 })
 
 //add books
-router.post("/books", isLoggedIn,upload.single('book_image'), async function (req, res) {
+router.post("/books", isLoggedIn, upload.single('book_image'), async function (req, res) {
 
   try {
     await bookcheckSchema.validateAsync(req.body, { abortEarly: false })

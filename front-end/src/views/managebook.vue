@@ -55,7 +55,7 @@ export default {
         });
     },
     getimg(img) {
-      return "/" + img;
+      return "http://44.204.115.240:3001/" + img;
     },
     deletebooks(del){
 

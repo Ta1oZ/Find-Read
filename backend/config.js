@@ -1,10 +1,10 @@
 const mysql = require('mysql2/promise');
 
 // const pool = mysql.createPool({
-//   host: 'mysql.c9062wi2okby.us-east-1.rds.amazonaws.com',
-//   user: 'admin',
-//   password: 'password!',
-//   database: 'FindRead',
+//   host: '127.0.0.1',
+//   user: 'root',
+//   password: 'NOLsvsw28',
+//   database: 'find-read',
 //   waitForConnections: true,
 //   connectionLimit: 10,
 //   queueLimit: 0
