@@ -44,7 +44,7 @@ export default {
   methods: {
     getbooks() {
       axios
-        .get("http://localhost:3001/books", {
+        .get("/books", {
         })
         .then((response) => {
           this.items = response.data.books;
@@ -55,7 +55,7 @@ export default {
         });
     },
     getimg(img) {
-      return "http://localhost:3001/" + img;
+      return "/" + img;
     },
     deletebooks(del){
 
@@ -64,7 +64,7 @@ export default {
       })
       alert("comp")
       axios
-        .delete(`http://localhost:3001/books/${del}`, {
+        .delete(`/books/${del}`, {
         })
         .then((response) => {
           // this.items = response.data.books;

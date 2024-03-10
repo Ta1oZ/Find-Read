@@ -3,7 +3,28 @@ var cors = require('cors')
 const path = require("path")
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: function (origin, callback) {
+    // Check if the origin is allowed (e.g., all origins with port 8080)
+    if (!origin || origin.endsWith(":8080")) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error("Not allowed by CORS")); // Block the request
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
+  allowedHeaders: true // Allow specified headers
+}));
+
+// app.use(cors());
+
+// app.options('*', cors());
+
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
+
 // Statics
 app.use(express.static('static'))
 

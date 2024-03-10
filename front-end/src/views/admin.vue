@@ -1,7 +1,7 @@
 <script setup>
 import navcomp from '../components/navbar.vue'
 import footcomp from '../components/footer.vue'
-import axios from "axios";
+import axios from '@/plugins/axios';
 
 </script>
 

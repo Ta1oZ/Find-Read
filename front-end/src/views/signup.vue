@@ -79,7 +79,7 @@
 <script>
 import useValidate from '@vuelidate/core'
 import { required, email, minLength, maxLength, sameAs } from '@vuelidate/validators'
-import axios from 'axios'
+import axios from '@/plugins/axios';
 
 function safePassword(value) {
     if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
@@ -120,7 +120,7 @@ export default {
                     role: this.role
                 }
 
-                axios.post("http://localhost:3001/user/signup", data)
+                axios.post("/user/signup", data)
                 .then((res) => {
                     alert("Sign up Success");
                     this.$router.push({ name: "login" })

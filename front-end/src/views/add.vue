@@ -120,7 +120,7 @@ export default {
                 book_image: this.file,
                 user: parseInt(this.cuser.user_id)
             }
-            axios.post('http://localhost:3001/books', data, {
+            axios.post('/books', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
