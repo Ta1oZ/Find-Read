@@ -5,14 +5,6 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: function (origin, callback) {
-    // Check if the origin is allowed (e.g., all origins with port 8080)
-    if (!origin || origin.endsWith(":80")) {
-      callback(null, true); // Allow the request
-    } else {
-      callback(new Error("Not allowed by CORS")); // Block the request
-    }
-  },
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specified HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'] // Allow specified headers
 }));

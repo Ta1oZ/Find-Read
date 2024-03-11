@@ -3,6 +3,7 @@ const pool = require("../config");
 const argon2 = require('argon2')
 const Joi = require('joi')
 const multer = require('multer');
+
 // SET STORAGE
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -66,7 +67,7 @@ const signupSchema = Joi.object({
     confirm_password: Joi.string().required().valid(Joi.ref('password')),
     username: Joi.string().required().min(5).external(usernameCheck),
     birth_date: Joi.date().required(),
-    role : Joi.string().required().default("user")
+    role: Joi.string().required().default("user")
 })
 
 router.post("/user/signup", async (req, res, next) => {
@@ -197,7 +198,7 @@ router.put('/user/update/:id', isLoggedIn, checkProfile, upload.single('user_pic
     if (user_pic) {
         try {
             const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ?, user_pic = ? WHERE user_id = ?",
-            [username, first_name, last_name, email, user_pic, req.params.id])
+                [username, first_name, last_name, email, user_pic, req.params.id])
             console.log(row)
             await conn.commit()
             res.json({ message: "Update success" })
@@ -210,10 +211,10 @@ router.put('/user/update/:id', isLoggedIn, checkProfile, upload.single('user_pic
             conn.release();
         }
     }
-    else{
+    else {
         try {
             const [row] = await pool.query("UPDATE user SET username = ?, first_name = ?, last_name = ?, email = ? WHERE user_id = ?",
-            [username, first_name, last_name, email, req.params.id])
+                [username, first_name, last_name, email, req.params.id])
             console.log(row)
             await conn.commit()
             res.json({ message: "Update success" })

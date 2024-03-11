@@ -5,12 +5,14 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "client-s3-deploy": "aws s3 sync dist/ s3://findread-s3"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
     "autoprefixer": "^10",
+    "aws-sdk": "^2.1574.0",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",

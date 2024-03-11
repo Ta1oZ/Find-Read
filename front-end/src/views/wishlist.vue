@@ -1,6 +1,6 @@
 <script setup>
 import navcomp from '../components/navbar.vue'
-import axios from '@/plugins/axios';
+import axios, { baseURL } from '@/plugins/axios';
 </script>
 
 <template>
@@ -56,7 +56,8 @@ export default {
         });
     },
     getimg(img) {
-      return "/" + img;
+      console.log(baseURL)
+      return  baseURL + img;
     },
     createwish(seen) {
       console.log(seen)
