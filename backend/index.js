@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
   origin: function (origin, callback) {
     // Check if the origin is allowed (e.g., all origins with port 8080)
-    if (!origin || origin.endsWith(":8080")) {
+    if (!origin || origin.endsWith(":80")) {
       callback(null, true); // Allow the request
     } else {
       callback(new Error("Not allowed by CORS")); // Block the request
@@ -44,6 +44,6 @@ app.use(memberRouter.router)
 app.use(commentRouter.router)
 app.use(userRouter.router)
 
-app.listen(3001, () => {
-  console.log(`Example app listening at http://localhost:3001`)
+app.listen(3000, () => {
+  console.log(`Example app listening at http://localhost:3000`)
 })
