@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import axios from '@/plugins/axios'
+
 </script>
 
 <template>

@@ -13,6 +13,7 @@ import user from '../views/user.vue'
 import banuser from '../views/banuser.vue'
 import editbook from '../views/editbook.vue'
 import profile from '../views/profile.vue'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [

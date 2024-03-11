@@ -1,6 +1,7 @@
 <script setup>
 import navcomp from '../components/navbar.vue'
 import axios from '@/plugins/axios';
+import axios, { baseURL } from '@/plugins/axios';
 </script>
 
 <template>
@@ -55,7 +56,8 @@ export default {
         });
     },
     getimg(img) {
-      return "http://44.204.115.240:3001/" + img;
+      console.log(baseURL)
+      return  baseURL + img;
     },
     deletebooks(del){
 
