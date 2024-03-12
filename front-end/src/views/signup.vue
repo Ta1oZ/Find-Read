@@ -139,7 +139,8 @@ export default {
             email: { required, email },
             first_name: { required, maxLength: maxLength(150) },
             last_name: { required, maxLength: maxLength(150) },
-            birth_date: { required }
+            birth_date: { required },
+            role: {required}
         }
     },
 }
