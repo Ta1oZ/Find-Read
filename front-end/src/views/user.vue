@@ -14,14 +14,12 @@ import axios from '@/plugins/axios';
                     <th class="bg-black text-white text-xl">Username</th>
                     <th class="bg-black text-white text-xl">Name</th>
                     <th class="bg-black text-white text-xl">Email</th>
-                    <th class="bg-black text-white text-xl">Action</th>
                 </thead>
                 <tbody v-for="(item, index) in member" :key="item.id">
                     <td class="bg-slate-400 text-lg"><b>{{ index + 1 }}</b></td>
                     <td class="bg-slate-400 text-lg"><b>{{ item.username }}</b></td>
                     <td class="bg-slate-400 text-lg"><b>{{ item.first_name + " " + item.last_name }}</b></td>
                     <td class="bg-slate-400 text-lg"><b>{{ item.email }}</b></td>
-                    <td class="bg-slate-400"><button class="w-24 h-10 rounded-lg bg-rose-500 text-white my-2 mx-2" @click="banMember(item.user_id)">Ban user.</button></td>
                 </tbody>
             </table>
         </div>
@@ -48,17 +46,17 @@ export default {
                 console.log(err);
         });
         },
-        banMember(user_id){
-            console.log(user_id);
-            axios.put(`/members/${user_id}`).then(res => {
-                this.member = res.data.user;
-                window.location.reload();
-                console.log(res.data.user);
-            })
-            .catch((err) => {
-                console.log(err);
-        });
-        }
+        // banMember(user_id){
+        //     console.log(user_id);
+        //     axios.put(`/members/${user_id}`).then(res => {
+        //         this.member = res.data.user;
+        //         window.location.reload();
+        //         console.log(res.data.user);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        // });
+        // }
     }
 }
 </script>

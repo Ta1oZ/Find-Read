@@ -32,7 +32,7 @@ import axios from '@/plugins/axios';
                                 <option value="garden">การจัดสวน</option>
                                 <option value="novel">นวนิยาย</option>
                             </select>
-                            <template v-if="v$.type.$error" class="mt-0">
+                            <template v-if="v$.type.$error">
                                 <p class="text-rose-500 mt-0" v-if="v$.type.$errors[0].$validator == 'required'"><b>Book type is required !</b></p>
                             </template>
                         </div>
