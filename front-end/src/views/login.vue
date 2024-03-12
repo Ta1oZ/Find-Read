@@ -84,7 +84,7 @@ export default {
             icon: "success",
             title: "Login Success",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 3000,
           });
           const token = res.data.token;
           localStorage.setItem("token", token);

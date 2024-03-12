@@ -6,21 +6,14 @@ import axios from "@/plugins/axios";
 <template>
   <div id="app">
     <navcomp></navcomp>
-    <h1
-      class="text-5xl text-center text-black underline underline-offset-8 my-8"
-    >
+    <h1 class="text-5xl text-center text-black underline underline-offset-8 my-8">
       <b>Manage books</b>
     </h1>
     <br /><br />
     <div class="w-full flex justify-center" style="height: 70px">
-      <router-link to="/add"
-        ><button
-          class="bg-gray-900 text-white rounded-lg"
-          style="width: 75px; height: 50px"
-        >
+      <router-link to="/add"><button class="bg-gray-900 text-white rounded-lg" style="width: 75px; height: 50px">
           Add
-        </button></router-link
-      >
+        </button></router-link>
     </div>
     <table class="w-full text-center border-collapse">
       <thead>
@@ -36,29 +29,16 @@ import axios from "@/plugins/axios";
         <td class="border-4 border-stone-500">{{ items.book_name }}</td>
         <td class="border-4 border-stone-500">{{ items.book_type }}</td>
         <td class="border-4 border-stone-500">{{ items.author }}</td>
-        <td
-          class="border-4 border-stone-500 justify-center"
-          style="width: 200px"
-        >
-          <img
-            :src="getimg(items.book_img)"
-            style="width: 200px; height: 200px"
-          />
+        <td class="border-4 border-stone-500 justify-center" style="width: 200px">
+          <img :src="getimg(items.book_img)" style="width: 200px; height: 200px" />
         </td>
         <td class="border-4 border-stone-500" style="width: 300px">
-          <router-link :to="{ name: 'editbook', params: { id: items.book_id } }"
-            ><button
-              class="bg-yellow-400 rounded-lg"
-              style="width: 75px; height: 50px"
-            >
+          <router-link :to="{ name: 'editbook', params: { id: items.book_id } }"><button
+              class="bg-yellow-400 rounded-lg" style="width: 75px; height: 50px">
               Edit
-            </button></router-link
-          >
-          <button
-            class="ml-4 bg-red-400 rounded-lg"
-            style="width: 75px; height: 50px"
-            @click="deletebooks(items.book_id)"
-          >
+            </button></router-link>
+          <button class="ml-4 bg-red-400 rounded-lg" style="width: 75px; height: 50px"
+            @click="deletebooks(items.book_id)">
             Delete
           </button>
         </td>
@@ -93,24 +73,37 @@ export default {
       return "http://localhost:3001/" + img;
     },
     deletebooks(del) {
-      this.items = this.items.filter((x) => {
-        return x.book_id != del;
-      });
       Swal.fire({
-        icon: "success",
-        title: "Book Deleted",
-        showConfirmButton: false,
-        timer: 1500,
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.items = this.items.filter((x) => x.book_id !== del);
+          axios
+            .delete(`http://localhost:3001/books/${del}`, {})
+            .then((response) => {
+              console.log(this.items);
+              Swal.fire(
+                'Deleted!',
+                'Your book has been deleted.',
+                'success'
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+              Swal.fire(
+                'Error!',
+                'Failed to delete the book.',
+                'error'
+              );
+            });
+        }
       });
-      axios
-        .delete(`http://localhost:3001/books/${del}`, {})
-        .then((response) => {
-          // this.items = response.data.books;
-          console.log(this.items);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
 };
