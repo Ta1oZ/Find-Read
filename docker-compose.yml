@@ -5,15 +5,17 @@ services:
     build: backend/.
     image: it64070092/findread-backend:latest
     ports:
-      - "3001:3001"
+      - "3000:3000"
     environment:
-      MYSQL_HOST: mysql-server
+      MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: password!
       MYSQL_DATABASE: find-read
     restart: always
     depends_on:
       - mysql
+    networks:
+      - mynetwork
 
   mysql:
     image: mysql:latest
@@ -26,12 +28,20 @@ services:
       - mysql-data:/var/lib/mysql
     ports:
       - "3307:3306"
+    networks:
+      - mynetwork
 
   frontend:
     build: front-end/.
     image: it64070092/findread-frontend:latest
     ports:
-      - "8080:80"
+      - "80:80"
+    networks:
+      - mynetwork
 
 volumes:
   mysql-data:
+
+networks:
+  mynetwork:
+    driver: bridge

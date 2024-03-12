@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const baseURL = "http://54.144.209.37:3000"
+
 const instance = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: baseURL,
 })
 
 instance.interceptors.request.use(
@@ -18,3 +20,4 @@ instance.interceptors.request.use(
 );
 
 export default instance
+export { baseURL };
