@@ -7,7 +7,7 @@ import axios from '@/plugins/axios';
     <navcomp></navcomp>
     <div id="app">
 
-        <h1 class="text-5xl text-center text-black underline underline-offset-8">Book{{ likes }}</h1><br><br>
+        <h1 class="text-5xl text-center text-black underline underline-offset-8">Book</h1><br><br>
         <section class="w-full h-96 flex justify-center items-center">
             <div class="container h-full flex" style="width: 900px;">
                 <div class="left w-64">
