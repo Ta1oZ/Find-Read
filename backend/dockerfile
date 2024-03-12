@@ -17,7 +17,7 @@ RUN npm rebuild
 COPY . .
 
 # Expose port (optional, adjust as needed)
-EXPOSE 3001
+EXPOSE 3000
 
 # Define start command
 CMD ["node", "index.js"]

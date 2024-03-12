@@ -46,17 +46,17 @@ export default {
                 console.log(err);
         });
         },
-        // banMember(user_id){
-        //     console.log(user_id);
-        //     axios.put(`/members/${user_id}`).then(res => {
-        //         this.member = res.data.user;
-        //         window.location.reload();
-        //         console.log(res.data.user);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        // });
-        // }
+        banMember(user_id){
+            console.log(user_id);
+            axios.put(`/members/${user_id}`).then(res => {
+                this.member = res.data.user;
+                window.location.reload();
+                console.log(res.data.user);
+            })
+            .catch((err) => {
+                console.log(err);
+        });
+        }
     }
 }
 </script>

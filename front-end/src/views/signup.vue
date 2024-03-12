@@ -104,7 +104,7 @@
 <script>
 import useValidate from '@vuelidate/core'
 import { required, email, minLength, maxLength, sameAs } from '@vuelidate/validators'
-import axios from 'axios'
+import axios from '@/plugins/axios';
 import Swal from 'sweetalert2'
 
 function safePassword(value) {
@@ -146,7 +146,7 @@ export default {
                     role: this.role
                 }
 
-                axios.post("http://localhost:3001/user/signup", data)
+                axios.post("/user/signup", data)
                     .then((res) => {
                         Swal.fire({
                             icon: "success",

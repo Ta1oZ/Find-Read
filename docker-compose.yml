@@ -35,7 +35,7 @@ services:
     build: front-end/.
     image: it64070092/findread-frontend:latest
     ports:
-      - "80:80"
+      - "8081:8081"
     networks:
       - mynetwork
 

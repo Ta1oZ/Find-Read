@@ -1,6 +1,6 @@
 <script setup>
 import navcomp from "../components/navbar.vue";
-import axios from "@/plugins/axios";
+import axios, { baseURL } from '@/plugins/axios';
 </script>
 
 <template>
@@ -60,7 +60,7 @@ export default {
   methods: {
     getbooks() {
       axios
-        .get("http://localhost:3001/books", {})
+        .get("/books", {})
         .then((response) => {
           this.items = response.data.books;
           console.log(this.items);
@@ -70,7 +70,8 @@ export default {
         });
     },
     getimg(img) {
-      return "http://localhost:3001/" + img;
+        console.log(baseURL)
+      return  baseURL + img;
     },
     deletebooks(del) {
       Swal.fire({
@@ -85,7 +86,7 @@ export default {
         if (result.isConfirmed) {
           this.items = this.items.filter((x) => x.book_id !== del);
           axios
-            .delete(`http://localhost:3001/books/${del}`, {})
+            .delete(`/books/${del}`, {})
             .then((response) => {
               console.log(this.items);
               Swal.fire(

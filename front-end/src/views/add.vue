@@ -234,7 +234,7 @@ export default {
         user: parseInt(this.cuser.user_id),
       };
       axios
-        .post("http://localhost:3001/books", data, {
+        .post("/books", data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

@@ -107,7 +107,7 @@ export default {
         }
     },
     created() {
-        axios.get(`http://localhost:3001/book/${this.$route.params.id}`)
+        axios.get(`/book/${this.$route.params.id}`)
             .then((response) => {
                 this.item = response.data.book[0];
                 this.like = response.data.like;
@@ -115,7 +115,7 @@ export default {
             .catch((err) => {
                 console.log(err);
             });
-        axios.get(`http://localhost:3001/comments/${this.$route.params.id}`)
+        axios.get(`/comments/${this.$route.params.id}`)
             .then((response) => {
                 this.comments = response.data.comment;
                 console.log(this.comments)
@@ -131,11 +131,12 @@ export default {
     },
     methods: {
         getimg(img) {
-            return "http://localhost:3001/" + img;
+            console.log(baseURL)
+            return  baseURL + img;
         },
         addComment() {
             axios
-                .post(`http://localhost:3001/${this.$route.params.id}/comments`, {
+                .post(`/${this.$route.params.id}/comments`, {
                     comment: this.comment,
                 })
                 .then((response) => {
@@ -150,7 +151,7 @@ export default {
         },
         updatecomm(wantup) {
             axios
-                .put(`http://localhost:3001/comments/${wantup}`, {
+                .put(`/comments/${wantup}`, {
                     comment: this.commentedit
                 })
                 .then((response) => {
@@ -171,7 +172,7 @@ export default {
              })
             console.log(want)
             axios
-                .delete(`http://localhost:3001/comments/${want}`)
+                .delete(`/comments/${want}`)
                 .then((response) => {
                     console.log(response)
                 })
@@ -181,7 +182,7 @@ export default {
         },
         createlike(seen){
             axios
-            .post(`http://localhost:3001/like`, {sent:seen})
+            .post(`/like`, {sent:seen})
             .then((response) => {
                     this.likes = response.data
                     console.log(response.data);
@@ -194,7 +195,7 @@ export default {
             // this.comments = this.comments.filter((x) =>{
             //  return x.comment_id != seen
             //  })
-            axios.post("http://localhost:3001/wishlist", { sent: seen })
+            axios.post("/wishlist", { sent: seen })
                 .then((response) => {
                     this.status  = response.data
                     console.log(response.data)
@@ -206,7 +207,7 @@ export default {
         },
         getwish() {
             axios
-                .get("http://localhost:3001/wishlist", {
+                .get("/wishlist", {
                 })
                 .then((response) => {
                     this.wishlist = response.data.wish;

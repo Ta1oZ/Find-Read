@@ -78,7 +78,7 @@ export default {
       };
 
       axios
-        .post("http://localhost:3001/user/login/", data)
+        .post("/user/login/", data)
         .then((res) => {
           Swal.fire({
             icon: "success",
